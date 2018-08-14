@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team649.robot.commands.ExampleCommand;
 import org.usfirst.frc.team649.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team649.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
 
 /**

@@ -25,4 +25,5 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 	public static final int SHOOTER_CHANNEL = 0;
+	public static final int ARM_MOTOR = 0;
 }
