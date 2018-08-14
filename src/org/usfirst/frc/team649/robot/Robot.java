@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team649.robot.commands.ExampleCommand;
+import org.usfirst.frc.team649.robot.commands.ShooterCommand;
 import org.usfirst.frc.team649.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
 
@@ -112,6 +113,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		if (m_oi.button1()) {
+			new ShooterCommand().start();
+		}
 	}
 
 	/**
