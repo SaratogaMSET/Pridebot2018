@@ -26,4 +26,9 @@ public class RobotMap {
 	
 	public static final int SHOOTER_CHANNEL = 0;
 	public static final int ARM_MOTOR = 0;
+	
+	public static final int LEFT_DRIVE_A = 0;
+	public static final int LEFT_DRIVE_B = 0;
+	public static final int RIGHT_DRIVE_A = 0;
+	public static final int RIGHT_DRIVE_B = 0;
 }
