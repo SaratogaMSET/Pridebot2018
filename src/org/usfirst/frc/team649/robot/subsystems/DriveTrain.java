@@ -1,5 +1,7 @@
 package org.usfirst.frc.team649.robot.subsystems;
 
+import org.usfirst.frc.team649.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -12,23 +14,23 @@ public class DriveTrain extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	TalonSRX talon1;
-	TalonSRX talon2;
-	TalonSRX talon3;
-	TalonSRX talon4;
+	TalonSRX leftDriveA;
+	TalonSRX leftDriveB;
+	TalonSRX rightDriveA;
+	TalonSRX rightDriveB;
 	
 	public DriveTrain() {
-		talon1 = new TalonSRX(12);
-		talon2 = new TalonSRX(13);
-		talon3 = new TalonSRX(19);
-		talon4 = new TalonSRX(20);
+		leftDriveA = new TalonSRX(RobotMap.LEFT_DRIVE_A);
+		leftDriveB = new TalonSRX(RobotMap.LEFT_DRIVE_B);
+		rightDriveA = new TalonSRX(RobotMap.RIGHT_DRIVE_A);
+		rightDriveB = new TalonSRX(RobotMap.RIGHT_DRIVE_B);
 	}
 	
 	public void arcadeDrive(double power, double rotation) {
-		talon1.set(ControlMode.PercentOutput, power+rotation);
-	    talon2.set(ControlMode.Follower, 12);
-	    talon3.set(ControlMode.PercentOutput, power-rotation);
-	    talon4.set(ControlMode.Follower, 19);
+		leftDriveA.set(ControlMode.PercentOutput, power+rotation);
+	    leftDriveB.set(ControlMode.Follower, RobotMap.LEFT_DRIVE_A);
+	    rightDriveA.set(ControlMode.PercentOutput, power-rotation);
+	    rightDriveB.set(ControlMode.Follower, RobotMap.RIGHT_DRIVE_A);
 	}
 
     public void initDefaultCommand() {
