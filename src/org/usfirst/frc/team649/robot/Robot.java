@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team649.robot.commands.ExampleCommand;
 import org.usfirst.frc.team649.robot.commands.ShooterCommand;
-import org.usfirst.frc.team649.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team649.robot.subsystems.ArmSubsystem;
+import org.usfirst.frc.team649.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
 
 /**
@@ -25,9 +26,11 @@ import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static ShooterSubsystem shooter_subsystem = new ShooterSubsystem();
+	public static ShooterSubsystem shooter_subsystem;
 	public static OI m_oi;
-	public static DriveTrain d;
+	public static DrivetrainSubsystem drivetrain_subsystem;
+	public static ArmSubsystem arm_subsystem;
+	public static int timeoutMs = 20;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -42,7 +45,9 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		d = new DriveTrain();
+		drivetrain_subsystem = new DrivetrainSubsystem();
+		arm_subsystem = new ArmSubsystem();
+		shooter_subsystem = new ShooterSubsystem();
 	}
 
 	/**

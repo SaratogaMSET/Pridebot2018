@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class DriveTrain extends Subsystem {
+public class DrivetrainSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -19,7 +19,7 @@ public class DriveTrain extends Subsystem {
 	TalonSRX rightDriveA;
 	TalonSRX rightDriveB;
 	
-	public DriveTrain() {
+	public DrivetrainSubsystem() {
 		leftDriveA = new TalonSRX(RobotMap.LEFT_DRIVE_A);
 		leftDriveB = new TalonSRX(RobotMap.LEFT_DRIVE_B);
 		rightDriveA = new TalonSRX(RobotMap.RIGHT_DRIVE_A);
