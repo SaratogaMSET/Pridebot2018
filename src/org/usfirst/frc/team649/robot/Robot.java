@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team649.robot.commands.ExampleCommand;
 import org.usfirst.frc.team649.robot.commands.ShooterCommand;
-import org.usfirst.frc.team649.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team649.robot.subsystems.DriveTrainSubsystem;
 import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
 
 /**
@@ -25,9 +25,9 @@ import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static ShooterSubsystem shooter_subsystem = new ShooterSubsystem();
+	public static ShooterSubsystem shooter_subsystem;
 	public static OI m_oi;
-	public static DriveTrain d;
+	public static DriveTrainSubsystem dt_subsystem;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -42,7 +42,8 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		d = new DriveTrain();
+		shooter_subsystem = new ShooterSubsystem();
+		dt_subsystem = new DriveTrainSubsystem();
 	}
 
 	/**
@@ -113,7 +114,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		if (m_oi.button1()) {
+		dt_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
+		if (m_oi.buttonA()) {
 			new ShooterCommand().start();
 		}
 	}
