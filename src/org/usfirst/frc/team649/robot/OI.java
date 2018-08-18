@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team649.robot;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick;
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
 	
-	XboxController controller1 = new XboxController(0);
+	Joystick controller1 = new Joystick(0);
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -23,20 +23,20 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	public boolean buttonA() {
-		return controller1.getAButton();
+	public boolean getButtonA() {
+		return controller1.getRawButton(1);
 	}
 	
-	public boolean buttonB() {
-		return controller1.getBButton();
+	public boolean getButtonB() {
+		return controller1.getRawButton(2);
 	}
 	
-	public boolean buttonX() {
-		return controller1.getXButton();
+	public boolean getButtonX() {
+		return controller1.getRawButton(3);
 	}
 	
-	public boolean buttonY() {
-		return controller1.getYButton();
+	public boolean getButtonY() {
+		return controller1.getRawButton(4);
 	}
 	
 	public double leftX() {
@@ -54,4 +54,13 @@ public class OI {
 	public double rightY() {
 		return controller1.getY(GenericHID.Hand.kRight);
 	}
+
+	
+	public double getLeftTrigger() {
+		return controller1.getRawAxis(2);
+	}
+	public double getRightTrigger() {
+		return controller1.getRawAxis(3);
+	}
+
 }

@@ -7,13 +7,16 @@
 
 package org.usfirst.frc.team649.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team649.robot.commands.ExampleCommand;
 import org.usfirst.frc.team649.robot.commands.ShooterCommand;
+import org.usfirst.frc.team649.robot.subsystems.ArmPrideSubsystem;
 import org.usfirst.frc.team649.robot.subsystems.DriveTrainSubsystem;
 import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
 
@@ -28,6 +31,8 @@ public class Robot extends TimedRobot {
 	public static ShooterSubsystem shooter_subsystem;
 	public static OI m_oi;
 	public static DriveTrainSubsystem dt_subsystem;
+	public static ArmPrideSubsystem ap_subsystem;
+	public static Compressor compressor;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -44,6 +49,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", m_chooser);
 		shooter_subsystem = new ShooterSubsystem();
 		dt_subsystem = new DriveTrainSubsystem();
+		ap_subsystem = new ArmPrideSubsystem();
+		compressor = new Compressor();
+		compressor.start();
 	}
 
 	/**
@@ -115,9 +123,17 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		dt_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
-		if (m_oi.buttonA()) {
+		if (m_oi.getButtonA()) {
 			new ShooterCommand().start();
 		}
+		
+		if (m_oi.getRightTrigger() > 0) {
+			ap_subsystem.goUp(m_oi.getRightTrigger());
+		}
+		else if(m_oi.getLeftTrigger() > 0) {
+			ap_subsystem.goDown(m_oi.getLeftTrigger());
+		}
+		
 	}
 
 	/**

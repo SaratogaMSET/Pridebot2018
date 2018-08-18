@@ -27,10 +27,10 @@ public class ShooterSubsystem extends Subsystem {
     
     public void shoot(boolean direction) {
     	if (direction) {
-    		shooter.setDirection(Relay.Direction.kForward);
+    		shooter.set(Relay.Value.kForward);
     	}
     	else {
-    		shooter.setDirection(Relay.Direction.kReverse);
+    		shooter.set(Relay.Value.kReverse);
     	}
     }
 }
