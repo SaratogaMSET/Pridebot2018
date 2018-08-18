@@ -123,16 +123,16 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		dt_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
+		drivetrain_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
 		if (m_oi.getButtonA()) {
 			new ShooterCommand().start();
 		}
 		
 		if (m_oi.getRightTrigger() > 0) {
-			ap_subsystem.goUp(m_oi.getRightTrigger());
+			arm_subsystem.goUp(m_oi.getRightTrigger());
 		}
 		else if(m_oi.getLeftTrigger() > 0) {
-			ap_subsystem.goDown(m_oi.getLeftTrigger());
+			arm_subsystem.goDown(m_oi.getLeftTrigger());
 		}
 		
 	}
