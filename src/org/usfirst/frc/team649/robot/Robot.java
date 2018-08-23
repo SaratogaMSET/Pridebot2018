@@ -129,7 +129,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		drivetrain_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
+//		drivetrain_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
+		drivetrain_subsystem.rawDrive(m_oi.leftY(), m_oi.rightY());
 		if (m_oi.getButtonA()) {
 			new ShooterCommand().start();
 		}
