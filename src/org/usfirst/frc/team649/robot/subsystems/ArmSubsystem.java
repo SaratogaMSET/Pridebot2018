@@ -38,10 +38,10 @@ public class ArmSubsystem extends Subsystem {
 		armMotor.set(ControlMode.MotionMagic, position);
 	}
 	public int getVelocity() {
-		return armMotor.getSelectedSensorVelocity();
+		return armMotor.getSelectedSensorVelocity(0);
 	}
 	public int getPosition() {
-		return armMotor.getSelectedSensorPosition();
+		return armMotor.getSelectedSensorPosition(0);
 	}
 	public void goUp( double d) {
 		setSpeed(d);

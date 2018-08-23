@@ -8,6 +8,7 @@
 package org.usfirst.frc.team649.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,6 +20,8 @@ import org.usfirst.frc.team649.robot.commands.ShooterCommand;
 import org.usfirst.frc.team649.robot.subsystems.ArmSubsystem;
 import org.usfirst.frc.team649.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team649.robot.subsystems.ShooterSubsystem;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,6 +37,8 @@ public class Robot extends TimedRobot {
 	public static DrivetrainSubsystem drivetrain_subsystem;
 	public static ArmSubsystem arm_subsystem;
 	public static int timeoutMs = 20;
+	public TalonSRX talon = new TalonSRX(12);
+	DoubleSolenoid test = new DoubleSolenoid(2,1,0);
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -51,8 +56,7 @@ public class Robot extends TimedRobot {
 		drivetrain_subsystem = new DrivetrainSubsystem();
 		arm_subsystem = new ArmSubsystem();
 		shooter_subsystem = new ShooterSubsystem();
-		compressor = new Compressor();
-		compressor.start();
+		compressor = new Compressor(2);
 	}
 
 	/**
@@ -115,6 +119,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		compressor.start();
+		
 	}
 
 	/**
@@ -135,6 +141,13 @@ public class Robot extends TimedRobot {
 			arm_subsystem.goDown(m_oi.getLeftTrigger());
 		}
 		
+		SmartDashboard.putBoolean("Compressor Connected?", compressor.getCompressorNotConnectedFault());
+		SmartDashboard.putBoolean("Current too high fault", compressor.getCompressorCurrentTooHighFault());
+		SmartDashboard.putBoolean("Compressor current to high sticky fault", compressor.getCompressorCurrentTooHighStickyFault());
+		SmartDashboard.putBoolean("Compressor sticky fault", compressor.getCompressorShortedStickyFault());
+
+		SmartDashboard.putBoolean("Pressure Switch Value", compressor.getPressureSwitchValue());
+		SmartDashboard.putBoolean("Enabled", compressor.enabled());
 	}
 
 	/**
