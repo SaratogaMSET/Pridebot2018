@@ -35,7 +35,7 @@ public class ShooterCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (timeElapsed >= 3) {
+    	if (timeElapsed >= 0.5) {
     		return true;
     	}
         return false;

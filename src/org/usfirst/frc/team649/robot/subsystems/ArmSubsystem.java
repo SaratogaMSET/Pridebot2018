@@ -44,10 +44,16 @@ public class ArmSubsystem extends Subsystem {
 		return armMotor.getSelectedSensorPosition(0);
 	}
 	public void goUp( double d) {
+		if (d > 0.25) {
+			d = 0.25;
+		}
 		setSpeed(d);
 	}
 	
 	public void goDown (double d) {
+		if (d > 0.25) {
+			d = 0.25;
+		}
 		setSpeed(-d);
 	}
 

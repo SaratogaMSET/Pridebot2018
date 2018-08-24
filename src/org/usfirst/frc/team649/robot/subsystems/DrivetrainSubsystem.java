@@ -36,8 +36,8 @@ public class DrivetrainSubsystem extends Subsystem {
 //	    rightDriveB.set(ControlMode.PercentOutput, right);
 	}
 	public void arcadeDrive(double power, double rotation) {
-		double leftPower = power+rotation;
-		double rightPower = power-rotation;
+		double leftPower = power-rotation;
+		double rightPower = power+rotation;
 		double maxe = Math.max(1, Math.max(Math.abs(leftPower), Math.abs(rightPower)));
 		leftPower/=maxe;
 		rightPower/=maxe;

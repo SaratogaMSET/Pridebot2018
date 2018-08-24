@@ -9,6 +9,7 @@ package org.usfirst.frc.team649.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -120,7 +121,8 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		compressor.start();
-		
+		shooter_subsystem.shooter.set(Relay.Value.kOff);
+
 	}
 
 	/**
@@ -129,17 +131,19 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		drivetrain_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
-		drivetrain_subsystem.rawDrive(m_oi.leftY(), m_oi.rightY());
+		drivetrain_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
+//		drivetrain_subsystem.rawDrive(m_oi.leftY(), m_oi.rightY());
 		if (m_oi.getButtonA()) {
 			new ShooterCommand().start();
 		}
 		
-		if (m_oi.getRightTrigger() > 0) {
+		if (m_oi.getRightTrigger() > 0.5) {
 			arm_subsystem.goUp(m_oi.getRightTrigger());
 		}
-		else if(m_oi.getLeftTrigger() > 0) {
+		else if(m_oi.getLeftTrigger() > 0.5) {
 			arm_subsystem.goDown(m_oi.getLeftTrigger());
+		} else {
+			arm_subsystem.goUp(0);
 		}
 		
 		SmartDashboard.putBoolean("Compressor Connected?", compressor.getCompressorNotConnectedFault());
