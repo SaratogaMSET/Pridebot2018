@@ -133,8 +133,12 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		drivetrain_subsystem.arcadeDrive(m_oi.leftY(), m_oi.rightX());
 //		drivetrain_subsystem.rawDrive(m_oi.leftY(), m_oi.rightY());
-		if (m_oi.getButtonA()) {
-			new ShooterCommand().start();
+		if (m_oi.shoot()) {
+			SmartDashboard.putString("Shot Length", "Long");
+			new ShooterCommand(true).start();
+		} else if (m_oi.shortShot()) {
+			SmartDashboard.putString("Shot Length", "Short");
+			new ShooterCommand(false).start();
 		}
 		
 		if (m_oi.getRightTrigger() > 0.5) {

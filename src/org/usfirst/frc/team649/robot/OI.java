@@ -54,8 +54,21 @@ public class OI {
 	public double rightY() {
 		return controller1.getY(GenericHID.Hand.kRight);
 	}
-
+	public boolean shoot(){
+		return getButtonA() && getRightButton() && getLeftButton();
+	}
 	
+	public boolean shortShot() {
+		return getButtonB() && getRightButton() && getLeftButton();
+	}
+	
+	public boolean getRightButton() {
+		return controller1.getRawButton(6);
+	}
+	
+	public boolean getLeftButton() {
+		return controller1.getRawButton(5);
+	}
 	public double getLeftTrigger() {
 		return controller1.getRawAxis(2);
 	}

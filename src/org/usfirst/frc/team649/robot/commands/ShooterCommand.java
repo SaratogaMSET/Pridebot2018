@@ -13,11 +13,16 @@ public class ShooterCommand extends Command {
 
 	private Timer shootingTimer;
 	private double timeElapsed = 0;
+	private double shortShotTime = 0.2;
+	private double longShotTime = 0.5;
+	private double shotTime;
+	private boolean isLongShot;
 	
-    public ShooterCommand() {
+    public ShooterCommand(boolean longShot) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooter_subsystem);
+    	this.isLongShot = longShot;
     }
 
     // Called just before this Command runs the first time
@@ -26,6 +31,11 @@ public class ShooterCommand extends Command {
     	shootingTimer = new Timer();
     	shootingTimer.reset();
     	shootingTimer.start();
+    	if (isLongShot) {
+    		shotTime = longShotTime;
+    	} else {
+    		shotTime = shortShotTime;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,7 +45,7 @@ public class ShooterCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (timeElapsed >= 0.5) {
+    	if (timeElapsed >= shotTime) {
     		return true;
     	}
         return false;
